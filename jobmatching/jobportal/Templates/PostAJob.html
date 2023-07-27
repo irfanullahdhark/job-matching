@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+{% include 'navbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostAJob</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <script src="{% static 'popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery.min.js' %}"></script>
+  
+  
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css ' %}" rel="stylesheet">
+    <link href="{% static 'js/bootstrap.min.js ' %}" rel="stylesheet">
+  
+  
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script>
+        $(document).ready(function(){
+       $("#fadein").click(function(){
+           $("#addjob").fadeToggle();
+           
+       });
+   });
+   </script>
+    <script>
+        function populate(s1,s2){
+            
+        var s1 = document.getElementById(s1)
+        var s2 =  document.getElementById(s2)
+        s2.innerHTML = "";
+
+       
+        if(s1.value =="NotRequired"){
+            var  optionarray = ['NoNeed|No need'];
+        }
+         else if(s1.value =="HighSchool"){
+            var optionarray = ['HighSchool|High school'];
+        }
+        else if(s1.value =="Bachelor"){
+            var optionarray = ['ComputerScience|Computer science',"Medical|Medical","Science|Science"];
+        }
+       
+        else if(s1.value =="BachelorAndMaster"){
+            var optionarray = ['ComputerScience|Computer science',"Medical|Medical","Science|Science"];
+        }
+        else if(s1.value =="BachlorMaseterAndDectorate"){
+            var optionarray = ['ComputerScience|Computer science',"Medical|Medical","Science|Science"];
+        }
+        else if(s1.value =="Master"){
+            var optionarray = ['HCI|HCI',"CyberSecurity|Cyber security","HL|HL"];
+        }
+        else if(s1.value =="Dectorate"){
+            var optionarray = ['R|R',"S|S","U|U"];
+        }
+
+        for(var option in optionarray){
+            var pair = optionarray[option].split("|");
+            var newoption = document.createElement("option");
+            newoption.value = pair[0];
+            newoption.innerHTML = pair[1];
+            s2.options.add(newoption);
+        }
+        }
+        function secondegrees(s3,s4){
+            
+            var s3 = document.getElementById(s3)
+            var s4 =  document.getElementById(s4)
+            s4.innerHTML = "";
+    
+           
+            
+            if(s3.value =="HighSchool"){
+                var optionarray = ['HighSchool|High school'];
+            }
+            else if(s3.value =="Bachelor"){
+                var optionarray = ['ComputerScience|Computer science',"Medical|Medical","Science|Science"];
+            }
+            else if(s3.value =="Master"){
+                var optionarray = ['ComputerScience|Computer science',"Medical|Medical","Science|Science"];
+            }
+            else if(s3.value =="Dectorate"){
+                var optionarray = ['R|R',"S|S","U|U"];
+            }
+    
+            for(var option in optionarray){
+                var pair = optionarray[option].split("|");
+                var newoption = document.createElement("option");
+                newoption.value = pair[0];
+                newoption.innerHTML = pair[1];
+                s4.options.add(newoption);
+            }
+            }
+    </script>
+    
+</head>
+<body>
+
+           
+
+
+
+    <div class="container pl-5">
+        
+     <div class="row mt-3 ml-4">
+        <div class="container align-items-center ml-4">
+            <div class="card  col-md-11">
+              <div class="card-header text-center"><h4> د وظیفې اړوند معلومات داخل کړئ</h4></div>
+              <div class="card-body">
+                  <form  method="POST" id="formid">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="JobTitle" placeholder="Enter JOb_Title" name="JobTitle" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="JobId" placeholder="Company Registration no" name="JobId" required min="1">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="Email" placeholder="Enter Email address" name="Email" required>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+        
+                        <div class="col-md-4">
+                    
+                            <div class="form-group">
+                                <label for="uname">Job_Starting_Date:</label>
+                                <input type="date" class="form-control" id="JobStartDate"  name="JobStartDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="uname">Job_Ending_Date:</label>
+                                <input type="date" class="form-control" id="JobEndDate"  name="JobEndDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Experience:</label><br>
+                        <select name="Experience" class="custom-select mb-3 " id="Experience">
+                            <option value="NotRequired">NotRequired</option>
+                            <option value="SixMonth">SixMonth</option>
+                            <option value="OneYear">OneYear</option>
+                            <option value="TwoYear">TwoYear</option>
+                        </select>
+                    </div>
+
+                   
+
+
+                   
+
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-md-4">
+                                <label>Location:</label><br>
+                            <select name="Location" class="custom-select mb-3 " id="Location">
+                                <option value="kabul">Kabul</option>
+                                <option value="paktia">Paktia</option>
+                                <option value="khost">Khost</option>
+                            </select>
+                        </div>
+                    
+                       
+                        <div class="col-md-4">
+                            <label>Degree:</label><br>
+                            <select name="Degree" class="custom-select mb-3" id="Degree" onchange="populate(this.id,'Field')">
+                               <option value="Everyone">Every One</option> 
+                               <option value="NotRequired">Not required</option> 
+                               <option value="AllEducated">AllEducated</option> 
+                               <option value="HighSchool">High school</option>
+                                <option value="Bachelor">Bachelor</option>
+                                <option value="Master">Master</option>
+                                <option value="Dectorate">Dectorate</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label >Select a Field:</label><br>
+                            <select name="Field" class="custom-select mb-3" id="Field">
+                                <option value="" >select field</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                         <input type="button" id="fadein" value="Add second degree" class="btn btn-outline-success btn-block">
+                        </div>
+                        <div class="col-md-4">
+                            
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="vacancynum" placeholder="Job Vacancy number" name="vacancynum" required>
+                            </div>
+                            </div>
+                    </div>
+                    <!-- <input type="button" id="fadein" value="Add seond degree" class="btn btn-outline-success btn-block"> -->
+                    <!-- <button  ></button> -->
+                    <div class="row pt-1" id="addjob" style="display:none;">
+                        
+                        <div class="col-md-6">
+                            <label>Degree:</label><br>
+                            <select name="SecondDegree" class="custom-select mb-3" id="SecondDegree" onchange="secondegrees(this.id,'Fields')">
+                             
+                              
+                                <option value="Bachelor">Bachelor</option>
+                                <option value="Master">Master</option>
+                                <option value="Dectorate">Dectorate</option>
+                            </select>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <label >Select a Field:</label><br>
+                            <select name="SecondFields" class="custom-select mb-3" id="Fields">
+                                <option value="" >select field</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Gender:</label><br>
+                            <select name="Gender" class="custom-select mb-3 " id="Gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Both">Both</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Type:</label><br>
+                          <select name="Type" class="custom-select mb-3 " id="Type">
+                            <option value="FullTime">FullTime</option>
+                            <option value="PartTime">PartTime</option>
+                          </select>
+                       </div>
+
+                       <div class="col-md-4">
+                        <label>Number of oppurtunity:</label><br>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="NoOfOpurtunity" placeholder="Number of oppurtunity" name="NoOfOpurtunity" min="1">
+                        </div>
+                        </div>
+
+                        
+                       
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label >Communication Skills:</label><br>
+                            <select name="CommunicationSkills" class="custom-select mb-3" id="CommunicationSkills">
+                            <option value="NotRequired">NotRequired</option>
+                            <option value="Escellent">Excellent</option>
+                            <option value="VeryGood">VeryGood</option>
+                            <option value="Good">Good</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Salary:</label><br>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Salary" placeholder="Salary" name="Salary" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Job duration:</label><br>
+                            <select name="jobDuration" class="custom-select mb-3 " id="jobDuration">
+                                <option value="Three months">Three months</option>
+                                <option value="Six month">Six month</option>
+                                <option value="One year">One year</option>
+                                <option value="All the time">All the time</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-3">
+                            <label for="sel2">Educational Skills:</label>
+                            <select multiple class="form-control" id="EducationalSkills" name="EducationalSkills">
+                                <option value="IT Manager">IT Manager</option>
+                                <option value="Software devoloper">Software Devoloper</option>
+                                <option value="Backend Devoloper">Backend Devoloper</option>
+                                <option value="Frontend Devoloper">Frontend Devoloper</option>
+                                <option value="Database Administrator">Database Administrator</option>
+                                <option value="Database Designer">Database Designer</option>
+                            </select>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <label for="sel2">Computer Skills:</label>
+                        <select multiple class="form-control" id="ComputerSkills" name="ComputerSkills">
+                            <option value="OfficePackage">Office package</option>
+                            <option value="Photoshop">Photoshop</option>
+                            <option value="Quickbook">Quickbook</option>
+                            <option value="Internet">Internet</option>
+                            <option value="VedioEditing">Vedio Editing</option>
+                           
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <label for="sel2">Language:</label>
+                        <select multiple class="form-control" id="Language" name="Language">
+                            <option value="Pashto">Pashto</option>
+                            <option value="Dari">Dari</option>
+                            <option value="Englis">Englis</option>
+                            <option value="Arabic">Arabic</option>
+                            <option value="French">French</option>
+                           
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-4 pl-1" >
+                        <label for="">percentage</label><br>
+                        <div >
+                            <div class="form-check-inline" >
+                                <label class="form-check-label" >
+                                <input type="radio" class="form-check-input" id="radio1" name="firstlanguagepercentage" value="50" >50%
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label" >
+                                 <input type="radio" class="form-check-input" id="radio2" name="firstlanguagepercentage" value="75">75%
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name = "firstlanguagepercentage" value="100">100%
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-check-inline" >
+                                <label class="form-check-label" >
+                                <input type="radio" class="form-check-input" id="radio1" name="secondlanguagepercentage" value="50" >50%
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label" >
+                                 <input type="radio" class="form-check-input" id="radio2" name="secondlanguagepercentage" value="75">75%
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name = "secondlanguagepercentage" value="100">100%
+                                </label>
+                            </div>
+                        </div>
+                        <div >
+                            <div class="form-check-inline" >
+                                <label class="form-check-label" >
+                                <input type="radio" class="form-check-input" id="radio1" name="thirdlanguagepercentage" value="50" >50%
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label" >
+                                 <input type="radio" class="form-check-input" id="radio2" name="thirdlanguagepercentage" value="75">75%
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name = "thirdlanguagepercentage" value="100">100%
+                                </label>
+                            </div>
+                        </div>
+                         <div >
+                            <div class="form-check-inline" >
+                                <label class="form-check-label" >
+                                <input type="radio" class="form-check-input" id="radio1" name="fourthlanguagepercentage" value="50" >50%
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label" >
+                                 <input type="radio" class="form-check-input" id="radio2" name="fourthlanguagepercentage" value="75">75%
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name = "fourthlanguagepercentage" value="100">100%
+                                </label>
+                            </div>
+                        </div>
+                           
+                    </div>
+
+
+                
+                    </div>                 
+                        <div class="row">
+                    <div class="form-group col-md-6">                 
+                        <textarea class="form-control" rows="3" id="Description" name="Description" placeholder="Add description here"></textarea>
+                    </div>
+                    
+               
+                        <div class="form-group col-md-6">                 
+                            <textarea class="form-control" rows="3" id="responisibility" name="responisibility" placeholder="Add responsibilities"></textarea>
+                        </div>
+                      </div>   
+                        <div class="r"> <button type="submit" class="btn btn-primary btn-block">Submit</button></div>                   
+                    </div>
+
+                 
+              
+              </form>
+            
+        </div> 
+            </div>
+        </div>
+     </div>
+    </div>
+    <script type="text/Javascript">
+        $(document).on('submit','#formid',function(e){
+          e.preventDefault();
+          $.ajax({
+            type="POST",
+            url:"{% url 'jobportal:postthejob' %}",
+            data:{
+                JobTitle:$('#JobTitle').val(),
+              JobId:$('#JobId').val(),
+              Email:$('#Email').val(),
+              JobStartDate:$('#JobStartDate').val(),
+              JobEndDate:$('#JobEndDate').val(),
+              Experience:$('#Experience').val(),
+              Location:$('#Location').val(),
+              Degree:$('#Degree').val(),
+              Field:$('#Field').val(),
+              AddDegree:$('#AddDegree').val(),
+              Gender:$('#Gender').val(),
+              Type:$('#Type').val(),
+              NoOfOpurtunity:$('#NoOfOpurtunity').val(),
+              NoOfOpurtunity:$('#vacancynum').val(),
+              CommunicationSkills:$('#CommunicationSkills').val(),
+              Salary:$('#Salary').val(),
+              jobDuration:$('#jobDuration').val(),
+              Description:$('#Description').val(),
+              responisibility:$('#responisibility').val(),
+
+
+              if($('#EducationalSkills:selected').length >1){
+                var EducationalSkills = [];
+                $('#EducationalSkills:selected').each(function(i,selected){
+                    EducationalSkills[i] = $(selected).val();
+                });
+              }
+              else
+              { var ComputerSkills = $('#ComputerSkills').val(); },
+
+              if($('#ComputerSkills:selected').length >1){
+                var ComputerSkills = [];
+                $('#ComputerSkills:selected').each(function(i,selected){
+                    ComputerSkills[i] = $(selected).val();
+                });
+              }
+              else
+              { var EducationalSkills = $('#ComputerSkills').val(); },
+
+              if($('#Language:selected').length >1){
+                var Language = [];
+                $('#Language:selected').each(function(i,selected){
+                    Language[i] = $(selected).val();
+                });
+              }
+              else
+              { var ComputerSkills = $('#Language').val(); },
+              $("input:radio[name=firstlanguagepercentage]:checked"),
+              $("input:radio[name=secondlanguagepercentage]:checked"),
+              $("input:radio[name=thirdlanguagepercentage]:checked"),
+              csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success:function(){
+              alert("successfully Registered");
+            }
+          });
+        });
+
+
+      </script>
+</body>
+</html>

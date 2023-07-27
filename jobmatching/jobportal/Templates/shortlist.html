@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% include 'navbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row">
+      <div class="col-md-8">
+    <div class="container mt-3 ">
+        <h2>Shortlisted people</h2>
+        <p>here is the list of Shortlisted people and we will automatically send them Email:</p>
+        {% for query in query %}
+        <div class="media border p-3 mt-3" style="background-color:hsl(147, 40%, 90%);">
+            {% if query.appliergender == "Male" %}
+             <img src="{% static 'img/img_avatar3.png' %}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+            {% elif query.appliergender == "Female" %}
+              <img src="{% static 'img/img_avatar1.png' %}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+            {% endif %}
+          <div class="media-body">
+            <h4>{{ query.applierusername }} <small><i>Date of birth {{ query.applierdateofbirth }}</i></small></h4>
+            <p>Phone num 0{{ query.applierphoneno }}</p>  
+            <p>Email: {{ query.applieremail }}</p>      
+
+            <p>Gender: {{ query.appliergender }}</p>      
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="container mt-3 ">
+          <h2>List of all appliers</h2>
+          <p>here is the list of all aplliers:</p>
+          {% for query in querysets %}
+          <div class="media border p-3 mt-3" style="background-color:hsl(147, 40%, 90%);">
+              {% if query.appliergender == "Male" %}
+               <img src="{% static 'img/img_avatar3.png' %}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+              {% elif query.appliergender == "Female" %}
+                <img src="{% static 'img/img_avatar1.png' %}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+              {% endif %}
+            <div class="media-body">
+              <h4>{{ query.applierusername }} <small><i>Date of birth {{ query.applierdateofbirth }}</i></small></h4>
+              <p>Phone num 0{{ query.applierphoneno }}</p>  
+              <p>Email: {{ query.applieremail }}</p>      
+  
+              <p>Gender: {{ query.appliergender }}</p>      
+  
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+    
+</body>
+</html>

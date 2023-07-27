@@ -1,0 +1,13 @@
+{
+        "builds": [{
+        "src": "jobmatching/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxlambdaSize": "15mb", "runtime": "python3.10" }
+        }],
+        "routes": [
+                {
+                        "src": "/(.*)",
+                        "dest": "jobmatching/wsgi.py"
+                }
+        ]
+}
