@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 app_name = "jobportal"
 urlpatterns=[
-    path('index/',views.index,name ="index"),
+    path('',views.index,name ="index"),
     path('about/',views.about,name="about"),
     path('job_listing/',views.job_listing,name="job_listing"),
     path('job_detail/<int:id>',views.job_detail,name="job_detail"),
