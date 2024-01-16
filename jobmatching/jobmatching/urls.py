@@ -21,5 +21,5 @@ from jobportal import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('jobportal/',include('jobportal.urls',namespace ="jobportal")),
+    path('',include('jobportal.urls',namespace ="jobportal")),
 ]
